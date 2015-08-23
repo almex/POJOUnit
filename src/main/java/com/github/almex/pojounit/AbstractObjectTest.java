@@ -112,8 +112,7 @@ public abstract class AbstractObjectTest extends AbstractPojoTest {
         assumeThat(x.equals(y), is(true));
         assumeThat(y.equals(z), is(true));
 
-        LOGGER.trace("testEqualsIsTransitive({}, {}, {})", new Object[]{x, y,
-                z});
+        LOGGER.trace("testEqualsIsTransitive({}, {}, {})", x, y, z);
         assertThat(z.equals(x), is(true));
     }
 

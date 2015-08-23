@@ -16,21 +16,6 @@ public class Address {
 
     private String country;
 
-    @Override
-    public int hashCode() {
-        return super.hashCode();
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        return super.equals(obj);
-    }
-
-    @Override
-    public String toString() {
-        return super.toString();
-    }
-
     public String getStreetName() {
         return streetName;
     }

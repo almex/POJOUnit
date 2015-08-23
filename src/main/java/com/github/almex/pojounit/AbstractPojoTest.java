@@ -4,12 +4,11 @@ import org.junit.Before;
 import org.junit.experimental.theories.DataPoint;
 import org.junit.experimental.theories.Theories;
 import org.junit.runner.RunWith;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
-import java.lang.reflect.Method;
+import java.lang.reflect.Field;
 import java.security.AccessController;
 import java.security.PrivilegedAction;
+import java.util.Objects;
 
 /**
  * <p>
@@ -41,11 +40,6 @@ public abstract class AbstractPojoTest {
     public static final Object OBJECT = new Object();
 
     /**
-     * Logger for this class.
-     */
-    protected static final Logger LOGGER = LoggerFactory.getLogger(AbstractPojoTest.class);
-
-    /**
      * Use reflection trick to use the <code>setId(T id)</code> method that is
      * private in your entity.
      *
@@ -58,30 +52,45 @@ public abstract class AbstractPojoTest {
      * @throws RuntimeException         for unexpected errors
      */
     protected static <K> Object setIdFor(final Object entity, final K id) {
+        Objects.requireNonNull(entity);
+
         try {
-            final Method method = entity.getClass()
-                    .getDeclaredMethod("setId",
-                            new Class[]{id.getClass()});
+            final Field field = getIdField(entity.getClass());
 
             // doPrivileged block
             AccessController.doPrivileged(new PrivilegedAction<Object>() {
                 public Object run() {
-                    method.setAccessible(true);
+                    field.setAccessible(true);
                     return null;
                 }
             });
-            method.invoke(entity, new Object[]{id});
+
+            field.set(entity, id);
 
             return entity;
         } catch (RuntimeException e) {
-            LOGGER.error("Unexpected error!", e);
             throw e;
         } catch (Exception e) {
-            LOGGER.error("Method setId(T id) does not exists.", e);
-            throw new IllegalArgumentException("Method setId(T id) does not"
-                    + " exists.",
-                    e);
+            throw new IllegalArgumentException("Field id does not exists.", e);
         }
+    }
+
+    private static Field getIdField(Class<?> clazz) throws NoSuchFieldException {
+        Field result;
+
+        try {
+            result = clazz.getDeclaredField("id");
+        } catch (NoSuchFieldException e) {
+            Class superClass = clazz.getSuperclass();
+
+            if (superClass != null) {
+                result = getIdField(superClass);
+            } else {
+                throw e;
+            }
+        }
+
+        return result;
     }
 
     /**

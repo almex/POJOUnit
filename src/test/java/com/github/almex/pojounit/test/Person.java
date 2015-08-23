@@ -1,30 +1,23 @@
 package com.github.almex.pojounit.test;
 
 /**
+ * This example POJO class use method coming from Object.
+ *
  * @author Almex
  * @since 1.0
  */
 public class Person {
 
-    private String firstName;
+    protected Long id;
 
-    private String lastName;
+    protected String firstName;
 
-    private Address address;
+    protected String lastName;
 
-    @Override
-    public int hashCode() {
-        return super.hashCode();
-    }
+    protected Address address;
 
-    @Override
-    public boolean equals(Object obj) {
-        return super.equals(obj);
-    }
-
-    @Override
-    public String toString() {
-        return super.toString();
+    public Long getId() {
+        return id;
     }
 
     public String getFirstName() {

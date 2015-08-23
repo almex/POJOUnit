@@ -1,6 +1,7 @@
 package com.github.almex.pojounit.test;
 
 import com.github.almex.pojounit.AbstractObjectTest;
+import com.github.almex.pojounit.model.Address;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.experimental.theories.DataPoint;

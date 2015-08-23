@@ -1,5 +1,7 @@
 package com.github.almex.pojounit.test;
 
+import com.github.almex.pojounit.model.Person;
+
 /**
  * This example POJO class use method coming from Object.
  *

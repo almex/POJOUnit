@@ -1,3 +1,27 @@
+/*
+ * The MIT License (MIT)
+ *
+ * Copyright (c) 2015 Almex
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a
+ * copy of this software and associated documentation files (the "Software"),
+ * to deal in the Software without restriction, including without limitation
+ * the rights to use, copy, modify, merge, publish, distribute, sublicense,
+ * and/or sell copies of the Software, and to permit persons to whom the
+ * Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+ * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+ * IN THE SOFTWARE.
+ */
+
 package com.github.almex.pojounit;
 
 import org.junit.Before;
@@ -40,16 +64,15 @@ public abstract class AbstractPojoTest {
     public static final Object OBJECT = new Object();
 
     /**
-     * Use reflection trick to use the <code>setId(T id)</code> method that is
-     * private in your entity.
+     * Use reflection trick to set the {@code id} field that is
+     * private in your entity and has no setter.
      *
      * @param <K>    type of the id
      * @param entity to modify
      * @param id     to set
-     * @return the <code>obj</code> parameter
-     * @throws IllegalArgumentException if the method <code>setId(T id)</code>
-     *                                  does not exists or is not accessible
-     * @throws RuntimeException         for unexpected errors
+     * @return the {@code entity} parameter
+     * @throws IllegalArgumentException if the field {@code id}
+     *                                  does not exists either in {@code this} or its {@code super}
      */
     protected static <K> Object setIdFor(final Object entity, final K id) {
         Objects.requireNonNull(entity);
@@ -68,10 +91,10 @@ public abstract class AbstractPojoTest {
             field.set(entity, id);
 
             return entity;
-        } catch (RuntimeException e) {
-            throw e;
-        } catch (Exception e) {
-            throw new IllegalArgumentException("Field id does not exists.", e);
+        } catch (NoSuchFieldException e) {
+            throw new IllegalArgumentException("Field 'id' does not exists.", e);
+        } catch (IllegalAccessException e) {
+            throw new IllegalArgumentException("Field 'id' is not accessible.", e);
         }
     }
 

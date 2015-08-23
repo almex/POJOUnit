@@ -1,4 +1,4 @@
-package com.github.almex.pojounit.test;
+package com.github.almex.pojounit.model;
 
 /**
  * @author Almex

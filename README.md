@@ -1,5 +1,5 @@
 # POJOUnit
-[![Build Status](https://travis-ci.org/almex/POJOUnit.svg)](https://travis-ci.org/almex/POJOUnit) [![Coverage Status](https://coveralls.io/repos/almex/POJOUnit/badge.svg?branch=master&service=github)](https://coveralls.io/github/almex/POJOUnit?branch=master)
+[![Build Status](https://travis-ci.org/almex/POJOUnit.svg)](https://travis-ci.org/almex/POJOUnit) [![Coverage Status](https://coveralls.io/repos/almex/POJOUnit/badge.svg?branch=master&service=github)](https://coveralls.io/github/almex/POJOUnit?branch=master) [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.almex/pojo-unit/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.github.almex/pojo-unit)
 
 This is a simple Java Framework to generify unit testing of POJO (Plain Old Java Objects) and JavaBean.
 To do so we implemented a generic class by using JUnit `Theories` (read its [Javadoc](http://junit.org/apidocs/org/junit/experimental/theories/Theories.html) and the [documentation](https://github.com/junit-team/junit/wiki/Theories)) making it easy to test combination of different `DataPoint`. 

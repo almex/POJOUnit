@@ -53,7 +53,7 @@ import static org.junit.Assume.assumeThat;
  * <i>We log only tests that respect assumptions.</i>
  * </p>
  *
- * @author Alexis SOUMAGNE.
+ * @author Alexis Soumagne
  * @see AbstractPojoTest
  * @see Object
  */
@@ -62,8 +62,7 @@ public abstract class AbstractObjectTest extends AbstractPojoTest {
     /**
      * Logger for this class.
      */
-    protected static final Logger LOGGER = LoggerFactory
-            .getLogger(AbstractObjectTest.class);
+    protected static final Logger LOGGER = LoggerFactory.getLogger(AbstractObjectTest.class);
 
     /**
      * How many times we loop to test that hashCode() and equals() are self

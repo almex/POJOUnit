@@ -63,7 +63,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>${project.build.sourceEncoding}</project.reporting.outputEncoding>
 
-        <version.log4j>2.2</version.log4j>
+        <version.log4j>2.5</version.log4j>
         <version.slf4j>1.7.5</version.slf4j>
         <version.disruptor>3.3.0</version.disruptor>
         <version.junit>4.12</version.junit>

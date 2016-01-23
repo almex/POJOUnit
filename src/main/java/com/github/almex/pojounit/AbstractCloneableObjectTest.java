@@ -1,10 +1,12 @@
 package com.github.almex.pojounit;
 
 import org.junit.experimental.theories.Theory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import static org.hamcrest.CoreMatchers.*;
+import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
-import static org.junit.Assume.assumeThat;
+import static org.junit.Assume.assumeTrue;
 
 /**
  * If your {@link Object} is {@link Cloneable} then you can test your {@link Object#clone()} method
@@ -14,6 +16,23 @@ import static org.junit.Assume.assumeThat;
  * @since 1.1
  */
 public abstract class AbstractCloneableObjectTest extends AbstractObjectTest {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(AbstractCloneableObjectTest.class);
+
+
+    /**
+     * Seems like a bug to me  :
+     * If I don't have a method with two parameters in this class
+     * then the first method will always fail due to not matching parameters.
+     * I cannot figure out if it's due to JUnit {@link Theory} or Harmcrest assumptions.
+     *
+     * @param x first parameter
+     * @param y second parameter
+     */
+    @Theory(nullsAccepted = false)
+    public void theoryClone(final Object x, final Object y) {
+    }
+
     /**
      * Test that a clone is equal to the original.
      * <p>
@@ -22,10 +41,9 @@ public abstract class AbstractCloneableObjectTest extends AbstractObjectTest {
      *
      * @param x first parameter
      */
-    @Theory
+    @Theory(nullsAccepted = false)
     public void theoryCloneAreEquals(final Object x) {
-        assumeThat(x, is(notNullValue()));
-        assumeThat(Cloneable.class.isAssignableFrom(x.getClass()), is(true));
+        assumeTrue(Cloneable.class.isAssignableFrom(x.getClass()));
 
         LOGGER.trace("theoryCloneAreEquals({})", x);
 
@@ -40,10 +58,9 @@ public abstract class AbstractCloneableObjectTest extends AbstractObjectTest {
      *
      * @param x first parameter
      */
-    @Theory
+    @Theory(nullsAccepted = false)
     public void theoryCloneAreTheSameType(final Object x) {
-        assumeThat(x, is(notNullValue()));
-        assumeThat(Cloneable.class.isAssignableFrom(x.getClass()), is(true));
+        assumeTrue(Cloneable.class.isAssignableFrom(x.getClass()));
 
         LOGGER.trace("theoryCloneAreTheSameType({})", x);
 
@@ -58,10 +75,9 @@ public abstract class AbstractCloneableObjectTest extends AbstractObjectTest {
      *
      * @param x first parameter
      */
-    @Theory
+    @Theory(nullsAccepted = false)
     public void theoryCloneIsNotTheSameReference(final Object x) {
-        assumeThat(x, is(notNullValue()));
-        assumeThat(Cloneable.class.isAssignableFrom(x.getClass()), is(true));
+        assumeTrue(Cloneable.class.isAssignableFrom(x.getClass()));
 
         LOGGER.trace("theoryCloneIsNotTheSameReference({})", x);
 

@@ -79,7 +79,7 @@ public class Person implements Cloneable {
             result = (Person) super.clone();
 
             result.setAddress(this.getAddress());
-            result.setFirstName(this.getLastName());
+            result.setFirstName(this.getFirstName());
             result.setLastName(this.getLastName());
         } catch (CloneNotSupportedException e) {
             // We swallow the exception

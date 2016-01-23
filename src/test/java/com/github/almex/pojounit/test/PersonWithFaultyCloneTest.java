@@ -24,7 +24,7 @@
 
 package com.github.almex.pojounit.test;
 
-import com.github.almex.pojounit.AbstractObjectTest;
+import com.github.almex.pojounit.AbstractCloneableObjectTest;
 import com.github.almex.pojounit.model.Address;
 import org.junit.Before;
 import org.junit.Rule;
@@ -32,18 +32,18 @@ import org.junit.experimental.theories.DataPoint;
 
 /**
  * @author Alexis Soumagne
- * @since 1.0
+ * @since 1.1
  */
-public class PersonWithFaultyToStringTest extends AbstractObjectTest {
+public class PersonWithFaultyCloneTest extends AbstractCloneableObjectTest {
 
     @DataPoint
-    public static PersonWithFaultyToString DATA_POINT1;
+    public static PersonWithFaultyClone DATA_POINT1;
 
     @DataPoint
-    public static PersonWithFaultyToString DATA_POINT2;
+    public static PersonWithFaultyClone DATA_POINT2;
 
     @DataPoint
-    public static PersonWithFaultyToString DATA_POINT3;
+    public static PersonWithFaultyClone DATA_POINT3;
 
     @Rule
     public ExpectedFailure expectedFailure = ExpectedFailure.none();
@@ -59,13 +59,13 @@ public class PersonWithFaultyToStringTest extends AbstractObjectTest {
         address.setStreetName("streetName");
         address.setStreetNumber("12");
 
-        DATA_POINT1 = new PersonWithFaultyToString();
+        DATA_POINT1 = new PersonWithFaultyClone();
         setIdFor(DATA_POINT1, 1L);
         DATA_POINT1.setAddress(address);
         DATA_POINT1.setFirstName("foo");
         DATA_POINT1.setLastName("bar");
 
-        DATA_POINT3 = new PersonWithFaultyToString();
+        DATA_POINT3 = new PersonWithFaultyClone();
         setIdFor(DATA_POINT3, 2L);
         DATA_POINT3.setAddress(address);
         DATA_POINT3.setFirstName("foo");
@@ -73,8 +73,8 @@ public class PersonWithFaultyToStringTest extends AbstractObjectTest {
     }
 
     @Override
-    public void theoryToStringIsFunctional(Object x) {
+    public void theoryCloneIsNotTheSameReference(Object x) {
         expectedFailure.markAsExpected();
-        super.theoryToStringIsFunctional(x);
+        super.theoryCloneIsNotTheSameReference(x);
     }
 }

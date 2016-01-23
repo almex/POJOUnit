@@ -30,8 +30,11 @@ import org.junit.experimental.theories.Theories;
 import org.junit.runner.RunWith;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.security.AccessController;
 import java.security.PrivilegedAction;
+import java.security.PrivilegedActionException;
+import java.security.PrivilegedExceptionAction;
 import java.util.Objects;
 
 /**
@@ -45,7 +48,7 @@ import java.util.Objects;
  * <i>It's advised to only log tests that respect assumptions.</i>
  * </p>
  *
- * @author Alexis SOUMAGNE.
+ * @author Alexis Soumagne
  * @see DataPoint
  * @see Theories
  */
@@ -81,11 +84,10 @@ public abstract class AbstractPojoTest {
             final Field field = getIdField(entity.getClass());
 
             // doPrivileged block
-            AccessController.doPrivileged(new PrivilegedAction<Object>() {
-                public Object run() {
-                    field.setAccessible(true);
-                    return null;
-                }
+            AccessController.doPrivileged((PrivilegedAction<Object>) () -> {
+                field.setAccessible(true);
+
+                return null;
             });
 
             field.set(entity, id);
@@ -111,6 +113,49 @@ public abstract class AbstractPojoTest {
             } else {
                 throw e;
             }
+        }
+
+        return result;
+    }
+
+    /**
+     * Use reflection trick to call {@code clone()} method that is
+     * private in your entity.
+     *
+     * @param entity to modify
+     * @return the result of the called method'
+     * @throws IllegalArgumentException if the method {@code clone()}
+     *                                  does not exists either in {@code this} or its {@code super}
+     */
+    protected static Object callClone(final Object entity) {
+        Objects.requireNonNull(entity);
+
+
+        try {
+            final Method method = getCloneMethod(entity.getClass());
+
+            // doPrivileged block
+            return AccessController.doPrivileged((PrivilegedExceptionAction<Object>) () -> {
+                method.setAccessible(true);
+
+                return method.invoke(entity);
+            });
+        } catch (PrivilegedActionException e) {
+            throw new IllegalArgumentException("Method 'clone()' is not accessible", e);
+        }
+    }
+
+    private static Method getCloneMethod(Class<?> clazz) {
+        Method result = null;
+
+        try {
+            result = clazz.getDeclaredMethod("clone");
+        } catch (NoSuchMethodException e) {
+            Class<?> superClass = clazz.getSuperclass();
+
+            if (superClass != null) {
+                result = getCloneMethod(superClass);
+            } // This method exists in every Object, there is no 'else' statement.
         }
 
         return result;

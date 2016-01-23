@@ -6,6 +6,9 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.experimental.theories.DataPoint;
 
+import static org.junit.Assert.assertThat;
+import static org.junit.Assume.assumeThat;
+
 /**
  * @author Almex
  * @since 1.0

@@ -213,6 +213,7 @@ public abstract class AbstractObjectTest extends AbstractPojoTest {
         assumeThat(x.equals(y), is(true));
 
         LOGGER.trace("testHashCodeIsConsistentWithEquals({}, {})", x, y);
+
         assertThat(x.hashCode(), is(equalTo(y.hashCode())));
     }
 
@@ -228,8 +229,8 @@ public abstract class AbstractObjectTest extends AbstractPojoTest {
         assumeThat(y, is(notNullValue()));
         assumeThat(x.getClass().isAssignableFrom(y.getClass()), is(false));
 
-        LOGGER.trace("testDifferentTypeAreNotEquals({}, {})", x.getClass(),
-                y.getClass());
+        LOGGER.trace("testDifferentTypeAreNotEquals({}, {})", x.getClass(), y.getClass());
+
         assertThat(x.equals(y), is(false));
     }
 

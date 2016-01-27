@@ -111,10 +111,10 @@ public abstract class AbstractObjectTest extends AbstractPojoTest {
     public void theoryEqualsIsSymmetric(final Object x, final Object y) {
         assumeThat(x, is(notNullValue()));
         assumeThat(y, is(notNullValue()));
-        assumeThat(y.equals(x), is(not(true)));
+        assumeThat(y.equals(x), is(true));
 
         LOGGER.trace("testEqualsIsSymmetric({}, {})", x, y);
-        assertThat(x.equals(y), is(false));
+        assertThat(x.equals(y), is(true));
     }
 
     /**

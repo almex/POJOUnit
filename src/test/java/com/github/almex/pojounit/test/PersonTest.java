@@ -1,22 +1,16 @@
 package com.github.almex.pojounit.test;
 
-import com.github.almex.pojounit.AbstractCloneableObjectTest;
+import com.github.almex.pojounit.AbstractObjectTest;
 import com.github.almex.pojounit.model.Address;
 import com.github.almex.pojounit.model.Person;
 import org.junit.Before;
-import org.junit.Test;
 import org.junit.experimental.theories.DataPoint;
-import org.junit.experimental.theories.Theory;
-
-import static org.hamcrest.CoreMatchers.*;
-import static org.junit.Assert.assertThat;
-import static org.junit.Assume.assumeThat;
 
 /**
  * @author Almex
  * @since 1.1
  */
-public class PersonTest extends AbstractCloneableObjectTest {
+public class PersonTest extends AbstractObjectTest {
 
     @DataPoint
     public static Person DATA_POINT1;

@@ -9,15 +9,15 @@ import static org.junit.Assert.assertThat;
 import static org.junit.Assume.assumeTrue;
 
 /**
- * If your {@link Object} is {@link Cloneable} then you can test your {@link Object#clone()} method
- * in addition to those already present in {@link AbstractObjectTest}.
+ * If your {@link Object} is {@link Cloneable} then you can test your {@link Object#clone()} method via this generic
+ * test.
  *
  * @author Alexis Soumagne
  * @since 1.1
  */
-public abstract class AbstractCloneableObjectTest extends AbstractObjectTest {
+public abstract class AbstractCloneableTest extends AbstractPojoTest {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(AbstractCloneableObjectTest.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(AbstractCloneableTest.class);
 
 
     /**

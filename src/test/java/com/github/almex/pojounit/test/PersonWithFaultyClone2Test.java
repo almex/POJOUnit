@@ -24,7 +24,7 @@
 
 package com.github.almex.pojounit.test;
 
-import com.github.almex.pojounit.AbstractCloneableObjectTest;
+import com.github.almex.pojounit.AbstractCloneableTest;
 import com.github.almex.pojounit.model.Address;
 import org.junit.Before;
 import org.junit.Rule;
@@ -34,7 +34,7 @@ import org.junit.experimental.theories.DataPoint;
  * @author Alexis Soumagne
  * @since 1.1
  */
-public class PersonWithFaultyClone2Test extends AbstractCloneableObjectTest {
+public class PersonWithFaultyClone2Test extends AbstractCloneableTest {
 
     @DataPoint
     public static PersonWithFaultyClone2 DATA_POINT1;

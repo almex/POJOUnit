@@ -50,7 +50,7 @@ import static org.junit.Assume.assumeThat;
  * <code>@Datapoint</code>
  * </p>
  * <p>
- * <i>We log only tests that respect assumptions.</i>
+ * <i>We log only tests for which assumptions are {@code true}.</i>
  * </p>
  *
  * @author Alexis Soumagne

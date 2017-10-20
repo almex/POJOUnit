@@ -8,3 +8,11 @@ dependency-reduced-pom.xml
 buildNumber.properties
 *.iml
 .idea
+.gradle/
+.sonar/
+build.gradle
+build/
+gradle/
+gradlew
+gradlew.bat
+settings.gradle
